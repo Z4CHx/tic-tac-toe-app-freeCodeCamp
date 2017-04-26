@@ -4,6 +4,7 @@ body {
   background-color: lightgray;
   background-image: url('https://previews.123rf.com/images/chekman/chekman1501/chekman150101326/35335681-gray-wall-texture-concrete-concrete-wall-background-Stock-Photo.jpg');
   color: white;
+    background-blend-mode:darken;
 }
 
 
@@ -11,12 +12,55 @@ div {
   box-sixing: border-box;
 }
 
+#logo {
+    position: absolute;
+    margin-left: 55px;
+    max-width: 20%;
+    min-width: 200px;
+    opacity: .9;
+    -webkit-transform: rotate(5deg);
+    transform: rotate(5deg);
+}
+
+#logo div {
+    mix-blend-mode: darken;
+}
+
+#tac {
+    margin-left: 50px;
+    width: 275px;
+    -webkit-transform: rotate(5deg);
+    transform: rotate(-10deg);
+}
+
+#tac, #toe {
+    margin-top: -100px;
+    box-shadow: 0 0 10px rgba(0,0,0, .3);
+}
+
+#tic {
+    box-shadow: 0 0 10px rgba(0,0,0, .75);
+    opacity: .95;
+}
+
+#tac {
+    
+    opacity: .8;
+}
+
+#toe {
+    box-shadow: 0 0 5px rgba(0,0,0, .5);
+    opacity: .9;
+}
+
+
+
 #board {
   width: 635px;
   height: 610px;
-  margin: 25px auto;
-  -webkit-transform: rotate(1deg);
-          transform: rotate(1deg);
+  margin: 35px auto 0 40%;
+  -webkit-transform: rotate(-1deg);
+          transform: rotate(-1deg);
   box-shadow: -1px 1px 3px rgba(0,0,0,.75);
 }
 

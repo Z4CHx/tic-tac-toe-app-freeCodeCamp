@@ -26,7 +26,7 @@
   
   boardSpace.click(function(){
     var spaceIdRaw = this.id; // string "1"
-    spaceId = spaceIdRaw.slice(1);
+    var spaceId = spaceIdRaw.slice(1);
     console.log(spaceId);
     if($(this).html() === "") { // if space empty
       console.log("empty"); 
@@ -41,7 +41,6 @@
             possNpcMoves = allPossNpcMoves.filter(function(possibleMoves){
               return possibleMoves !== spaceId;
             });
-            // (1) , 2, 3...if user clicked one,the other spaces that would lead to success are logged for the pc to choose to counter from
             console.log(possNpcMoves);
           } // end check for space in a winning row
         } // end inner loop that searches a keys values to match the click
