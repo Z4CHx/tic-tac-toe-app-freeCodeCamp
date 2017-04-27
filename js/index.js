@@ -3,6 +3,7 @@ $(document).ready(function(){
     var boardSpace = $(".board-space");
     var winnerMark = $("#winnerMark");
     var gameOverScreen = $("#gameOverScreen");
+    var chooseMarkScreen = $("#chooseMarkScreen");
     var restartBtn = $("#restartBtn");
     var npcMark = function(){
       if ( playersMark === "X" ) {
@@ -11,6 +12,8 @@ $(document).ready(function(){
         return "X";
       }
     };
+    var xmarkBtn = $("#xMark");
+    var omarkBtn = $("#oMark");
     var playersMark = "";
     var allPossNpcMoves = [];
     var possNpcMoves = [];
@@ -79,10 +82,18 @@ $(document).ready(function(){
       }  
     };
     var startGame = function() {
-        playersMark = prompt("X or O").toUpperCase();
         console.log("startgame called");
         clearBoardRecord();
         gameOverScreen.fadeOut();
+        chooseMarkScreen.fadeIn();
+        xmarkBtn.click(function(){
+            playersMark = "X"; 
+            chooseMarkScreen.fadeOut();
+        });
+        omarkBtn.click(function(){
+            playersMark = "O";
+            chooseMarkScreen.fadeOut();
+        });
         boardSpace.html("");
         return;
     };
