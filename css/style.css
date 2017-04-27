@@ -2,7 +2,7 @@ body {
   font-family: sans-serif;
   font-family: 'Indie Flower', cursive;
   background-color: lightgray;
-  background-image: url('https://previews.123rf.com/images/chekman/chekman1501/chekman150101326/35335681-gray-wall-texture-concrete-concrete-wall-background-Stock-Photo.jpg');
+  background-image: url('../img/concrete-background-min.jpg');
   color: white;
     background-blend-mode:darken;
 }
@@ -57,7 +57,6 @@ div {
 }
 
 #restartBtn:hover {
-    font-size: 48px;
     -webkit-transition: .25s;
     transition: .25s;
     color: green;
