@@ -1,8 +1,10 @@
 $(document).ready(function(){
     
     var boardSpace = $(".board-space");
+    var winnerMark = $("#winnerMark");
+    var gameOverScreen = $("#gameOverScreen");
+    var restartBtn = $("#restartBtn");
     var space;
-    var playersMark = prompt("X or O").toUpperCase();
     var npcMark = function(){
       if ( playersMark === "X" ) {
         return "O";
@@ -10,6 +12,7 @@ $(document).ready(function(){
         return "X";
       }
     };
+    var playersMark = "";
     var allPossNpcMoves = [];
     var possNpcMoves = [];
     var winningLines = { 
@@ -35,16 +38,19 @@ $(document).ready(function(){
     var checkForWinner = function() {
         for ( var i = 1 ; i <= keys.length ; i++ ) {
 
-
             if ( boardRecord[i][0] === "X" && boardRecord[i][1] === "X" && boardRecord[i][2] === "X" ) {
 
                 console.log("Xs win!");
+                winnerMark.html("X")
+                gameOverScreen.fadeToggle();
+        
 
             } else if ( boardRecord[i][0] === "O" && boardRecord[i][1] === "O" && boardRecord[i][2] === "O" ) {
-
+                
+                winnerMark.html("O");
+                gameOverScreen.fadeToggle();
                 console.log("Os win!");
             }
-
 
         } // end loop of keys in the board record
     };
@@ -64,7 +70,22 @@ $(document).ready(function(){
         } // end cycle through this key's values, wich are spaces in line 
         
     }; // end cycle through each board winning space key
-  
+    var clearBoardRecord = function() {
+      for( var i = 1 ; i <= keys.length ; i++ ) {
+          for ( var j = 0 ; j < 3 ; j++ ) {
+              boardRecord[i][j] = "";
+          }
+      }  
+    };
+    var startGame = function() {
+        playersMark = prompt("X or O").toUpperCase();
+        console.log("startgame called");
+        clearBoardRecord();
+        gameOverScreen.fadeOut();
+        boardSpace.html("");
+        return;
+    };
+    startGame();
     boardSpace.click(function(){
         var spaceIdRaw = this.id; // string "1"
         var spaceId = spaceIdRaw.slice(1); // remove "s" from ID 
@@ -104,5 +125,5 @@ $(document).ready(function(){
         console.log(boardRecord);
         
   }); // end players click session
-    
+    restartBtn.click(startGame);
 });

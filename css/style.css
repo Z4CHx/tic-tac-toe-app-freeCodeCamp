@@ -13,6 +13,7 @@ div {
 
 
 #gameOverScreen {
+    display: none;
     position: fixed;
     left: calc(50% - 300px);
     top: calc(50% - 200px);
@@ -45,7 +46,7 @@ div {
     text-shadow: -2px 2px 2px black;
 }
 
-#yes, #no {
+#restartBtn {
     display: inline-block;
     margin-top: 35px;
     font-size: 36px;
@@ -55,29 +56,12 @@ div {
     text-shadow: -2px 2px 2px black;
 }
 
-#yes {
-    margin-right: 20px;
-}
-
-#no {
-    margin-left: 20px;
-}
-
-#yes:hover, #no:hover {
+#restartBtn:hover {
     font-size: 48px;
     -webkit-transition: .25s;
     transition: .25s;
-}
-
-#yes:hover {
     color: green;
 }
-
-#no:hover {
-    color: crimson;
-}
-
-
 
 #logo {
     position: absolute;
