@@ -4,7 +4,6 @@ $(document).ready(function(){
     var winnerMark = $("#winnerMark");
     var gameOverScreen = $("#gameOverScreen");
     var restartBtn = $("#restartBtn");
-    var space;
     var npcMark = function(){
       if ( playersMark === "X" ) {
         return "O";
@@ -43,6 +42,7 @@ $(document).ready(function(){
                 console.log("Xs win!");
                 winnerMark.html("X")
                 gameOverScreen.fadeToggle();
+                return true;
         
 
             } else if ( boardRecord[i][0] === "O" && boardRecord[i][1] === "O" && boardRecord[i][2] === "O" ) {
@@ -50,6 +50,7 @@ $(document).ready(function(){
                 winnerMark.html("O");
                 gameOverScreen.fadeToggle();
                 console.log("Os win!");
+                return true;
             }
 
         } // end loop of keys in the board record
@@ -85,6 +86,9 @@ $(document).ready(function(){
         boardSpace.html("");
         return;
     };
+    
+    
+    
     startGame();
     boardSpace.click(function(){
         var spaceIdRaw = this.id; // string "1"
@@ -92,38 +96,37 @@ $(document).ready(function(){
     
         if( $(this).html() === "" ) { 
      
-        $(this).html(playersMark);
-        updateBoardRecord(spaceId, playersMark);
-        
+            $(this).html(playersMark);
+            updateBoardRecord(spaceId, playersMark);
+            checkForWinner();
       
-        for( var i = 1; i <= keys.length; i++ ) {
+            for( var i = 1; i <= keys.length; i++ ) {
         
-          for ( var j = 0 ; j < 3 ; j++ ) {
+                for ( var j = 0 ; j < 3 ; j++ ) {
               
-              if ( spaceId === winningLines[i][j] ) { // get winning line 
-                  allPossNpcMoves.push(...winningLines[i]);
-                  possNpcMoves = allPossNpcMoves.filter(function(possibleMoves){
-                    return possibleMoves !== spaceId;
-                  });
+                    if ( spaceId === winningLines[i][j] ) { // get winning line 
+                        allPossNpcMoves.push(...winningLines[i]);
+                        possNpcMoves = allPossNpcMoves.filter(function(possibleMoves){
+                            return possibleMoves !== spaceId;
+                        });
                   
-              } 
-          } // end cycle through this key's values, wich are spaces in line 
-        } // end cycle through each board winning space key 
-    } // end check if clicked space is blank
+                    } 
+                } // end cycle through this key's values, wich are spaces in line 
+            } // end cycle through each board winning space key 
+        } // end check if clicked space is blank
     
             for( var i = 0 ; i <= possNpcMoves.length ; i++ ) { 
           
             if($( "#s" + possNpcMoves[i]).html() === "" ) { 
-              $( "#s" + possNpcMoves[i]).html(npcMark);
-              updateBoardRecord(possNpcMoves[i],npcMark());
-              break; // was successfull, so loop can stop
+              
+                $( "#s" + possNpcMoves[i]).html(npcMark);
+                updateBoardRecord(possNpcMoves[i],npcMark());
+                break; // was successfull, so loop can stop
+                
           } // end check if space is empty
-          
         } // end loop through possible NPC moves ; add more logic here force win
-        
-        checkForWinner();
-        console.log(boardRecord);
-        
   }); // end players click session
+    checkForWinner();
     restartBtn.click(startGame);
+    
 });
