@@ -11,6 +11,74 @@ div {
   box-sixing: border-box;
 }
 
+
+#gameOverScreen {
+    position: fixed;
+    left: calc(50% - 300px);
+    top: calc(50% - 200px);
+    width: 600px;
+    height: 400px;
+    background-color: #333;
+    border-radius: 5px;
+    opacity: .9;
+    box-shadow: -3px 4px 20 black;
+    
+}
+
+#screenContainer {
+    margin: 25px;
+    height: 100%;
+    text-align: center;
+}
+
+#winner {
+    margin: 0 auto;
+    font-size: 175px;
+    text-align: center;
+    text-shadow: -2px 2px 2px black;
+}
+
+#playAgain {
+    font-size: 48px;
+    color: yellow;
+    opacity: .8;
+    text-shadow: -2px 2px 2px black;
+}
+
+#yes, #no {
+    display: inline-block;
+    margin-top: 35px;
+    font-size: 36px;
+    -webkit-transition: .25s;
+    transition: .25s;
+    cursor: pointer;
+    text-shadow: -2px 2px 2px black;
+}
+
+#yes {
+    margin-right: 20px;
+}
+
+#no {
+    margin-left: 20px;
+}
+
+#yes:hover, #no:hover {
+    font-size: 48px;
+    -webkit-transition: .25s;
+    transition: .25s;
+}
+
+#yes:hover {
+    color: green;
+}
+
+#no:hover {
+    color: crimson;
+}
+
+
+
 #logo {
     position: absolute;
     margin-left: 55px;

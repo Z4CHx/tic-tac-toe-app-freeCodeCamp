@@ -1,15 +1,18 @@
-  var boardSpace = $(".board-space");
-  var playersMark = prompt("X or O").toUpperCase();
-  var npcMark = function(){
-    if ( playersMark === "X" ) {
-      return "O";
-    } else {
-      return "X";
-    }
-  };
-  var allPossNpcMoves = [];
-  var possNpcMoves = [];
-  var winningLines = { 
+$(document).ready(function(){
+    
+    var boardSpace = $(".board-space");
+    var space;
+    var playersMark = prompt("X or O").toUpperCase();
+    var npcMark = function(){
+      if ( playersMark === "X" ) {
+        return "O";
+      } else {
+        return "X";
+      }
+    };
+    var allPossNpcMoves = [];
+    var possNpcMoves = [];
+    var winningLines = { 
     1 : ["1","2","3"], // 1,2,3
     2 : ["1","4","7"], // 1,4,7
     3 : ["1","5","9"], // 1,5,9
@@ -18,18 +21,61 @@
     6 : ["3","6","9"], // 3,6,9
     7 : ["4","5","6"], // 4,5,6
     8 : ["7","8","9"]  // 7,8,9
-  };
-  var keys = Object.keys(winningLines);
+    };
+    var boardRecord = { 
+    1 : ["","",""], // 1,2,3
+    2 : ["","",""], // 1,4,7
+    3 : ["","",""], // 1,5,9
+    4 : ["","",""], // 2,5,8
+    5 : ["","",""], // 3,5,7
+    6 : ["","",""], // 3,6,9
+    7 : ["","",""], // 4,5,6
+    8 : ["","",""]  // 7,8,9
+    };
+    var checkForWinner = function() {
+        for ( var i = 1 ; i <= keys.length ; i++ ) {
+
+
+            if ( boardRecord[i][0] === "X" && boardRecord[i][1] === "X" && boardRecord[i][2] === "X" ) {
+
+                console.log("Xs win!");
+
+            } else if ( boardRecord[i][0] === "O" && boardRecord[i][1] === "O" && boardRecord[i][2] === "O" ) {
+
+                console.log("Os win!");
+            }
+
+
+        } // end loop of keys in the board record
+    };
+    var keys = Object.keys(winningLines);
+    var updateBoardRecord = function(space, mark) {
+        
+        for( var i = 1; i <= keys.length; i++ ) {
+        
+            for ( var j = 0 ; j < 3 ; j++ ) {
+              
+                if ( winningLines[i][j] === space ) { 
+                    boardRecord[i][j] = mark;
+                }
+                  
+            }
+            
+        } // end cycle through this key's values, wich are spaces in line 
+        
+    }; // end cycle through each board winning space key
   
-  boardSpace.click(function(){
-    var spaceIdRaw = this.id; // string "1"
-    var spaceId = spaceIdRaw.slice(1); // remove "s" from ID 
+    boardSpace.click(function(){
+        var spaceIdRaw = this.id; // string "1"
+        var spaceId = spaceIdRaw.slice(1); // remove "s" from ID 
     
-    if( $(this).html() === "" ) { 
+        if( $(this).html() === "" ) { 
      
-        $(this).html(playersMark); 
+        $(this).html(playersMark);
+        updateBoardRecord(spaceId, playersMark);
+        
       
-        for( var i = 1; i < keys.length; i++ ) {
+        for( var i = 1; i <= keys.length; i++ ) {
         
           for ( var j = 0 ; j < 3 ; j++ ) {
               
@@ -44,14 +90,19 @@
         } // end cycle through each board winning space key 
     } // end check if clicked space is blank
     
-      for( var i = 0 ; i < possNpcMoves.length ; i++ ) { 
+            for( var i = 0 ; i <= possNpcMoves.length ; i++ ) { 
           
-          if($( "#s" + possNpcMoves[i]).html() === "" ) { 
+            if($( "#s" + possNpcMoves[i]).html() === "" ) { 
               $( "#s" + possNpcMoves[i]).html(npcMark);
+              updateBoardRecord(possNpcMoves[i],npcMark());
               break; // was successfull, so loop can stop
           } // end check if space is empty
           
-      } // end loop through possible NPC moves ; add more logic here force win
-  });
-
-
+        } // end loop through possible NPC moves ; add more logic here force win
+        
+        checkForWinner();
+        console.log(boardRecord);
+        
+  }); // end players click session
+    
+});
